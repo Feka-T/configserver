@@ -1,0 +1,36 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://host.docker.internal:8281/realms/saas-realm
+          jwk-set-uri: http://host.docker.internal:8281/realms/saas-realm/protocol/openid-connect/certs
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+keycloak:
+  server-url: http://host.docker.internal:8281
+  realm: saas-realm
+  client-id: saas-client
+  client-secret: XEZvEoVQRxYHitcrfeBJoVx5rY9mYd7U
+  openIdConnectUrl: http://host.docker.internal:8281/realms/saas-realm/.well-known/openid-configuration
